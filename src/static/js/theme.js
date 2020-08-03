@@ -20,7 +20,8 @@
             });
         }
     }
-    navbarFixed();
+    $(".header_area").addClass("navbar_fixed");
+    // navbarFixed();
 
 
     /*----------------------------------------------------*/

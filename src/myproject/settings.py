@@ -19,9 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     # third party apps
     'crispy_forms',
+    'phonenumber_field',
 
     # local apps are
     'src.myapp.apps.MyappConfig',
@@ -119,4 +119,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/account/login/'
 AUTH_USER_MODEL = 'account.Account'
