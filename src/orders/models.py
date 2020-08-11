@@ -1,11 +1,11 @@
 from django.db import models
-from src.myapp.models import Product
 
 from src.account.models import Account
+from src.myapp.models import Product
 
 
 class Order(models.Model):
-    user = models.ForeignKey(Account, related_name='user', on_delete=models.SET_NULL,null=True)
+    user = models.ForeignKey(Account, related_name='user', on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
@@ -18,6 +18,7 @@ class Order(models.Model):
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)

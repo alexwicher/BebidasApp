@@ -1,5 +1,4 @@
 from django.contrib.auth.views import PasswordResetView
-from django.shortcuts import render
 from django.views.generic import CreateView
 
 from src.account.models import Account
@@ -25,7 +24,7 @@ class PassWordResetCustom(PasswordResetView):
             'extra_email_context': self.extra_email_context,
         }
         if not Account.objects.filter(email=form.data['email']).count() == 1:
-            form.add_error('email','No account found for that email adress!')
+            form.add_error('email', 'No account found for that email adress!')
             return super().form_invalid(form)
 
         form.save(**opts)

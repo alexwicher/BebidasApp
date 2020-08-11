@@ -1,4 +1,4 @@
- (function ($) {
+(function ($) {
     "use strict"
 
 
@@ -20,16 +20,19 @@
             });
         }
     }
+
     $(".header_area").addClass("navbar_fixed");
     // navbarFixed();
 
 
     /*----------------------------------------------------*/
+
     /*  Parallax Effect js
     /*----------------------------------------------------*/
     function parallaxEffect() {
         $('.bg-parallax').parallax();
     }
+
     parallaxEffect();
 
     var dropToggle = $('.widgets_inner .list li').has('ul').children('a');
@@ -77,11 +80,13 @@
     //	
 
     /*----------------------------------------------------*/
+
     /*  MailChimp Slider
     /*----------------------------------------------------*/
     function mailChimp() {
         $('#mc_embed_signup').find('form').ajaxChimp();
     }
+
     mailChimp();
 
     $('select').niceSelect();
@@ -131,6 +136,7 @@
 
 
     /*----------------------------------------------------*/
+
     /*  Members Slider
     /*----------------------------------------------------*/
     function product_slider() {
@@ -163,9 +169,11 @@
             })
         }
     }
+
     product_slider();
 
     /*----------------------------------------------------*/
+
     /*  Clients Slider
     /*----------------------------------------------------*/
     function clients_slider() {
@@ -199,6 +207,7 @@
             })
         }
     }
+
     clients_slider();
 
     /*----------------------------------------------------*/
