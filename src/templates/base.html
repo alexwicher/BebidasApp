@@ -71,10 +71,10 @@
                                     <a class="nav-link" href="{% url 'myapp:product_list' %}">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Cart</a>
+                                    <a class="nav-link" href="{% url 'contact:email' %}">Contact</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'contact:email' %}">Contact</a>
+                                    <a class="nav-link" style="cursor: pointer" onclick="openSideBar()">Cart</a>
                                 </li>
                                 <li class="nav-item">
                                     {% if user.is_authenticated %}
@@ -97,6 +97,98 @@
     </div>
 </header>
 
+<script>
+
+    function openSideBar() {
+        document.getElementById("mySidenav").style.width = "25%";
+        document.getElementById("productContainer").style.marginRight = "15%";
+    }
+
+    function closeSideBar() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("productContainer").style.marginRight = "0";
+    }
+
+    {% for item in cart %}
+        document.getElementById({{ item.product.id }}).value = {{ item.quantity }};
+    {% endfor %}
+
+    function cartRemove(prodID_url) {
+        $.ajax({
+            url: prodID_url,
+            type: 'GET',
+            datatype: 'json',
+            success: function (data) {
+                item = document.getElementById(data.removedID);
+                item.remove();
+            },
+            error: function (data) {
+                alert('status -> ' + data.status); //or whatever
+            }
+        });
+    }
+</script>
+
+<div id="mySidenav" class="sidenav">
+    <div class="container" style="margin-top: 14%;padding: 3%">
+        <h3 class="text-uppercase mb-20 mt-2">Products
+            <i class="fa fa-close" style="position: absolute;right: 0;margin-right: 10%;cursor: pointer"
+               onclick="closeSideBar()"></i>
+        </h3>
+        <div id="basket">
+            <div class="box mt-0 pb-0 no-horizontal-padding">
+                <form method="POST" action="{% url 'orders:order_create' %}">
+                    <div class="table-responsive">
+                        <table class="table" style="font-family: Permanent Marker;">
+                            <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th colspan="2">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in cart %}
+                                {% with product=item.product %}
+                                    <tr id="{{ product.id }}">
+                                        <td><a style="font-size: 20px;"
+                                               href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                                        <td>
+                                            <label for="{{ product.id }}"/>
+                                            <input type="number" name="quantity" required="" min="1" max="999" step="1"
+                                                   size="3" id="{{ product.id }}" value="{{ item.quantity }}"
+                                            />
+                                        </td>
+                                        <td>${{ item.price }}</td>
+                                        <td>${{ item.total_price }}</td>
+                                        <td><a class="icon-btn"
+                                               onclick="cartRemove('{% url 'cart:cart_remove' product.id %}')"><i
+                                                class="fa fa-trash-o"></i></a></td>
+                                    </tr>
+                                {% endwith %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer d-flex justify-content-between align-items-center">
+                        <div class="right-col">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary"
+                                    style="font-size:20px;margin-top: 3%;color: #ffffff;"><i
+                                    class="fa fa-credit-card"></i>
+                                Order
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Use any element to open the sidenav -->
 {% block content %}
 
 {% endblock %}

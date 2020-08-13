@@ -21,12 +21,12 @@
                 </div>
             </div>
         </div>
-        <div class="row flex-row-reverse">
+        <div class="row flex-row-reverse" id="productContainer">
             <div class="col-lg-9">
                 <div class="latest_product_inner">
                     <div class="row">
                         {% for product in products %}
-                            <div class="col-lg-4 col-md-6">
+                            <div class="col-lg-3 col-md-6">
                                 <div class="single-product">
                                     <div class="product-img">
                                         <img class="card-img" src="{{ product.image.url }}" alt=""/>
@@ -67,5 +67,6 @@
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}

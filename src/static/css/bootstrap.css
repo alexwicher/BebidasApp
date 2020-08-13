@@ -1778,7 +1778,8 @@ pre code {
 
 .table td,
 .table th {
-    padding: .75rem;
+    padding-top: .4rem;
+    padding-bottom: .4rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6
 }
@@ -2682,6 +2683,15 @@ fieldset:disabled a.btn {
     color: #fff;
     background-color: #5a6268;
     border-color: #545b62
+}
+
+.icon-btn {
+    color: #fff;
+    cursor: pointer;
+}
+
+.icon-btn:hover {
+    color: #dedede;
 }
 
 .btn-secondary.focus,

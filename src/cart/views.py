@@ -1,5 +1,6 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 
 from src.myapp.models import Product
 from .cart import Cart
@@ -17,11 +18,12 @@ def cart_add(request, product_id):
     return redirect('cart:cart_detail')
 
 
+@require_GET
 def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
-    return redirect('cart:cart_detail')
+    return JsonResponse({'removedID': product_id})
 
 
 def cart_detail(request):
