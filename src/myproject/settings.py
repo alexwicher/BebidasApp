@@ -25,7 +25,6 @@ INSTALLED_APPS = [
 
     # local apps are
     'src.myapp.apps.MyappConfig',
-    'src.cart.apps.CartConfig',
     'src.orders.apps.OrdersConfig',
     'src.contact.apps.ContactConfig',
     'src.account.apps.AccountConfig',
@@ -54,7 +53,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'src.cart.context_processors.cart',
             ],
         },
     },

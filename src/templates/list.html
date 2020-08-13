@@ -27,12 +27,13 @@
                     <div class="row">
                         {% for product in products %}
                             <div class="col-lg-3 col-md-6">
-                                <div class="single-product">
+                                <div class="single-product" style="cursor: pointer"
+                                     onclick="cartAdd({{ product.id }},'{{ product.name }}',{{ product.price }})">
                                     <div class="product-img">
                                         <img class="card-img" src="{{ product.image.url }}" alt=""/>
                                     </div>
                                     <div class="product-btm">
-                                        <a href="{{ product.get_absolute_url }}" class="d-block">
+                                        <a class="d-block">
                                             <h4>{{ product.name }}</h4>
                                         </a>
                                         <div class="mt-3">
